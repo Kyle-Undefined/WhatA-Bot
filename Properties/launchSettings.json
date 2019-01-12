@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WhatANerd": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "NETCORE_ENVIRONMENT": "dev"
+      }
+    }
+  }
+}
