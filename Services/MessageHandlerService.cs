@@ -16,17 +16,16 @@
         private readonly DiscordSocketClient _client;
         private readonly CommandService _commands;
         private readonly LogService _log;
-        private readonly double _probability = 0.05;
-        private readonly Random _random;
+        private readonly double _probability = 0.01;
         private readonly IServiceProvider _services;
         private readonly Support _support;
+        private readonly Random _random = new Random();
 
-        public MessageHandlerService(DiscordSocketClient client, CommandService command, LogService log, IServiceProvider services, Random random, Support support)
+        public MessageHandlerService(DiscordSocketClient client, CommandService command, LogService log, IServiceProvider services, Support support)
         {
             _client = client;
             _commands = command;
             _log = log;
-            _random = random;
             _services = services;
             _support = support;
         }

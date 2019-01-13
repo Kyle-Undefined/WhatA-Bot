@@ -40,7 +40,6 @@
                 }))
                 .AddSingleton(configuration.GetSection("Tokens").Get<Tokens>())
                 .AddSingleton(configuration.GetSection("Support").Get<Support>())
-                .AddSingleton<Random>()
                 .AddSingleton<MessageHandlerService>()
                 .AddTransient<LogService>()
                 .AddLogging(builder =>

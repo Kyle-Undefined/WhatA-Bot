@@ -12,7 +12,7 @@
 
 ### Features
 
-* Has a 5% chance to call you a nerd
+* Has a 1% chance to call you a nerd
 * Simple mention prefix (@WhatANerd) for commands
 * Tracks total number of people who have been called a nerd
 * No thrills, just simple and does the job
