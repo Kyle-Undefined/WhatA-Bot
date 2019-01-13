@@ -17,9 +17,9 @@
         private readonly CommandService _commands;
         private readonly LogService _log;
         private readonly double _probability = 0.01;
+        private readonly Random _random = new Random();
         private readonly IServiceProvider _services;
         private readonly Support _support;
-        private readonly Random _random = new Random();
 
         public MessageHandlerService(DiscordSocketClient client, CommandService command, LogService log, IServiceProvider services, Support support)
         {

@@ -7,6 +7,7 @@
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Threading;
     using System.Threading.Tasks;
     using WhatANerd.Models;
     using WhatANerd.Services;
@@ -58,6 +59,8 @@
             var nerds = _client.Guilds.Sum(x => x.Users.Count);
             await _client.SetActivityAsync(new Game($"over {nerds} nerds!", ActivityType.Watching));
             await _log.LogMessage(new LogMessage(LogSeverity.Info, "Presence", $"Activity has been set to: [{ActivityType.Watching}] over {nerds} nerds!"));
+
+            SetupPresenceTimer();
         }
 
         private void SetupEvents()
@@ -70,6 +73,18 @@
 
             _commands.CommandErrored += _messageHandler.OnCommandErroredAsync;
             _commands.CommandExecuted += _messageHandler.OnCommandExecutedAsync;
+        }
+
+        private void SetupPresenceTimer()
+        {
+            var nerds = _client.Guilds.Sum(x => x.Users.Count);
+            var presenceTimer = new Timer(async _ =>
+            {
+                await _client.SetActivityAsync(new Game($"over {nerds} nerds!", ActivityType.Watching));
+                await _log.LogMessage(new LogMessage(LogSeverity.Info, "PresTimer", $"Activity has been set to: [{ActivityType.Watching}] over {nerds} nerds!"));
+            });
+
+            presenceTimer.Change(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
         }
     }
 }
