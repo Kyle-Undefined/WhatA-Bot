@@ -18,6 +18,12 @@
             await ReplyAsync("This nerd wants to invite me to his guild, let's go! <https://goo.gl/nXyp7W>");
         }
 
+        [Command("SourceCode")]
+        public async Task SourceAsync()
+        {
+            await ReplyAsync("Only a nerd would want to see what makes me tick! <https://github.com/Kyle-Undefined/WhatANerd>");
+        }
+
         [Command("Stats")]
         public async Task StatsAsync()
         {

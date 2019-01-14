@@ -8,7 +8,7 @@
         [Command("Help")]
         public async Task HelpAsync()
         {
-            await ReplyAsync("Ha, look at this nerd asking for help! Below are my commands: \n\n`Stats`, `Invite`, `SupportGuild`");
+            await ReplyAsync("Ha, look at this nerd asking for help! Below are my commands: \n\n`Invite`, `SourceCode`, `Stats`, `SupportGuild`");
         }
 
         [Command("SupportGuild")]
