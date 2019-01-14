@@ -77,12 +77,7 @@
 
         private void SetupPresenceTimer()
         {
-            var nerds = _client.Guilds.Sum(x => x.Users.Count);
-            var presenceTimer = new Timer(async _ =>
-            {
-                await _client.SetActivityAsync(new Game($"over {nerds} nerds!", ActivityType.Watching));
-                await _log.LogMessage(new LogMessage(LogSeverity.Info, "PresTimer", $"Activity has been set to: [{ActivityType.Watching}] over {nerds} nerds!"));
-            });
+            var presenceTimer = new Timer(async _ => await _client.SetActivityAsync(new Game($"over {_client.Guilds.Sum(x => x.Users.Count)} nerds!", ActivityType.Watching)));
 
             presenceTimer.Change(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
         }
