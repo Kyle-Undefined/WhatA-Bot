@@ -5,7 +5,9 @@
     using Newtonsoft.Json;
     using Qmmands;
     using System;
+    using System.Collections.Concurrent;
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
     using WhatANerd.Extensions;
     using WhatANerd.Models;
@@ -20,6 +22,7 @@
         private readonly Random _random = new Random();
         private readonly IServiceProvider _services;
         private readonly Support _support;
+        private readonly ConcurrentDictionary<ulong, byte[]> _guilds = new ConcurrentDictionary<ulong, byte[]>();
 
         public MessageHandlerService(DiscordSocketClient client, CommandService command, LogService log, IServiceProvider services, Support support)
         {
@@ -67,7 +70,7 @@
                 return;
             }
 
-            if (_random.NextDouble() < _probability)
+            if (!_guilds.ContainsKey(context.Guild.Id) && _random.NextDouble() < _probability)
             {
                 await context.Channel.SendMessageAsync($"{context.User.GetDisplayName()} is a nerd!");
 
@@ -77,6 +80,11 @@
                 var data = JsonConvert.DeserializeObject<Data>(File.ReadAllText("data.json"));
                 data.TotalNerds++;
                 File.WriteAllText("data.json", JsonConvert.SerializeObject(data));
+
+                _guilds.TryAdd(context.Guild.Id, new byte[1]);
+
+                var guildTimer = new Timer(_ => _guilds.TryRemove(context.Guild.Id, out var _));
+                guildTimer.Change(TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(10));
             }
         }
 

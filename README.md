@@ -13,6 +13,7 @@
 ### Features
 
 * Has a 1% chance to call you a nerd
+* 10 minute cooldown per guild
 * Simple mention prefix (@WhatANerd) for commands
 * Tracks total number of people who have been called a nerd
 * No thrills, just simple and does the job
